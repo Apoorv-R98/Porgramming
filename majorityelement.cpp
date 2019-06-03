@@ -1,24 +1,50 @@
+#include <iostream>
 using namespace std;
-
+int majority(int a[],int n)
+{
+    int majindex=0,cnt=1,i;
+    for(i=1;i<n;i++)
+	    {
+	        if(a[majindex]==a[i])
+	            cnt++;
+	        else
+	            cnt--;
+	        if(cnt==0)
+	        {
+	            majindex=i;
+	            cnt=1;
+	        }
+	    }
+	    cnt=0;
+	    for(i=0;i<n;i++)
+	    {
+	        if(a[i]==a[majindex])
+	        {
+	            cnt++;
+	        }
+	    }
+	    if(cnt>(n/2))
+	    {
+	        return a[majindex];
+	    }
+	    else
+	    {
+	        return -1;
+	    }
+}
 int main() {
-	int t,n,i;
-	cin>>t;
-	while(t)
+    int t;
+    cin>>t;
+	while(t--)
 	{
+	    int i,n;
 	    cin>>n;
 	    int a[n];
-	    for(i=0;i<n-1;i++)
+	    for(i=0;i<n;i++)
 	    {
 	        cin>>a[i];
 	    }
-	    int total = (n*(n+1))/2;
-	    int temp=0;
-	    for(i=0;i<n-1;i++)
-	    {
-	        temp = temp + a[i];
-	    }
-	    cout<<total-temp<<endl;
-	    t--;
+	    cout<<majority(a,n)<<"\n";
 	}
 	return 0;
 }
